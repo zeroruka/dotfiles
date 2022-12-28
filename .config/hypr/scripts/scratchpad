@@ -1,3 +1,0 @@
-#!/bin/sh
-
-[[ $(pgrep -c -f "kitty --class scratchpad") -eq 0 ]] && kitty --class scratchpad || pkill -f "kitty --class scratchpad"

@@ -136,7 +136,7 @@ end
 
 alias bat='bat --theme="Catppuccin-mocha"'
 alias hc=herbstclient
-alias code='code --ozone-platform=wayland'
+alias code='code-insiders'
 
 
 
