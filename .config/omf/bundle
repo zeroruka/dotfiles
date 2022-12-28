@@ -1,0 +1,6 @@
+package archlinux
+package bang-bang
+package cd
+package https://github.com/catppuccin/fish
+package sudope
+theme default

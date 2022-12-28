@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# swww animation settings
+export SWWW_TRANSITION=outer                    # Sets the type of transition. Default is 'simple', that fades into the new image
+export SWWW_TRANSITION_STEP=100                 # How fast the transition approaches the new image
+export SWWW_TRANSITION_DURATION=1.5             # How long the transition takes to complete in seconds
+export SWWW_TRANSITION_FPS=144                  # Frame rate for the transition effect
+export SWWW_TRANSITION_ANGLE=180                # This is only used for the 'wipe' transition. It controls the angle of the wipe
+export SWWW_TRANSITION_POS=0.6877,0.975         # This is only used for the 'grow','outer' transitions. It controls the center of circle
+export SWWW_TRANSITION_BEZIER=.4,0.02,0.21,0.99 # bezier curve to use for the transition
+
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+# if swww is not started, start it
+if ! pgrep -x "swww" >/dev/null; then
+    swww init
+    sleep 2
+fi
+
+var=$(cat ~/.config/hypr/store/wallpaper)
+wallpapernum=$(ls ~/.config/wallpapers | wc -l)
+new=$(($var + 1))
+
+# get the names of the wallpapers in .config/wallpapers
+wallpapers=($(ls ~/.config/wallpapers))
+
+# Test startup arg
+if [[ $1 != "startup" ]]; then
+    # If the script is not called on startup, then increment the wallpaper number
+    if [[ $var -ge $wallpapernum ]]; then
+        echo 1 >$HOME/.config/hypr/store/wallpaper
+    else
+        echo $new >$HOME/.config/hypr/store/wallpaper
+    fi
+else
+    var=$(($var - 1))
+    if [ $var -eq 0 ]; then
+        var=$wallpapernum
+    fi
+fi
+
+# Test mode
+if [[ $1 =~ ^[0-9]+$ ]] && [[ $(ls $HOME/.config/wallpapers | grep $1) ]]; then
+    var=$1
+    printf "$GREEN[MODE]$NC Direct\n"
+else
+    if [[ $1 == "startup" ]]; then
+        printf "$GREEN[MODE]$NC Startup\n"
+    else
+        printf "$GREEN[MODE]$NC Cycle\n"
+    fi
+fi
+
+# Set wallpaper
+
+printf "$GREEN[INFO]$NC Setting wallpaper to $var (${wallpapers[$(($var - 1))]})\n"
+
+swww img $HOME/.config/wallpapers/${wallpapers[$(($var - 1))]}
