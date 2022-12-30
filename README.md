@@ -33,7 +33,7 @@ https://user-images.githubusercontent.com/89210318/209757487-50b992ab-f3e6-4052-
 Install the following packages (Arch):
 
 ```
-hyprland-git waybar-hyprland-git cava python kitty fish rofi xdg-desktop-portal-hyprland-git grim slurp starship jq dunst wl-clipboard swaylock-effects-git btop pavucontrol swww polkit-kde-agent nerd-fonts-jetbrains-mono playerctl socat hyprpicker-git
+hyprland-git waybar-hyprland-git cava python kitty fish rofi xdg-desktop-portal-hyprland-git grim slurp starship jq dunst wl-clipboard swaylock-effects-git btop pavucontrol swww polkit-kde-agent nerd-fonts-jetbrains-mono playerctl socat hyprpicker-git inotify-tools-git
 ```
 
 Next, follow the [Quick Start Instructions](https://wiki.hyprland.org/) from Hyprland wiki.
